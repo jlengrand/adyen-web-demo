@@ -1,4 +1,5 @@
-import { PaymentAmount, PaymentMethodsResponseInterface } from '@adyen/adyen-web/dist/types/types';
+import { CoreOptions } from '@adyen/adyen-web/dist/types/core/types';
+import { PaymentAmount } from '@adyen/adyen-web/dist/types/types';
 
 export type InitializationRequest = {
   merchantAccount: string;
@@ -13,20 +14,11 @@ export type InitializationRequest = {
   shopperReference?: string;
 };
 
-export interface EditableCheckoutConfigFields {
-  session?: {
-    id: string;
-    data?: string;
-  };
-  paymentMethodsResponse?: PaymentMethodsResponseInterface;
+export interface EditableCheckoutConfigFields extends CoreOptions {
   redirectResult?: {
     redirectResult: string;
     redirectSessionId: string;
   };
-  environment: string;
-  clientKey: string;
-  paymentMethodsConfiguration?: object;
-  amount?: PaymentAmount;
   showPayButton?: boolean;
 }
 
@@ -34,7 +26,6 @@ export interface CheckoutConfig extends EditableCheckoutConfigFields {
   onChange?: (state: any, element: any) => void;
   onValid?: (state: any, element: any) => void;
   onSubmit?: (state: any, element: any) => void;
-  onComplete?: (state: any, element: any) => void;
   onAdditionalDetails?: (state: any, element: any) => void;
   onError?: (error: any, element?: any) => void;
   onPaymentCompleted?: (result: any, element: any) => void;
